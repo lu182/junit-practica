@@ -22,6 +22,15 @@ public class CuentaBancaria {
         return saldo;
     }
 
+    //Agrego Setters:
+    public void setUsuario(Usuario titular) {
+        this.titular = titular;
+    }
+
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
+    }
+
     //Método depositar:
     public void depositar(double saldoADepositar){
         //Validaciones:
