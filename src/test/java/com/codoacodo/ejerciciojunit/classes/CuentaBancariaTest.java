@@ -9,11 +9,19 @@ public class CuentaBancariaTest {
     private CuentaBancaria cuenta;
     private Usuario titularCuenta;
 
+    //Genero un segundo titular para el testSetUser:
+    private Usuario titularCuenta2;
+
+    private final double SALDO_AGREGADO = 500.0;
+
     @Before
     public void setUp(){
         titularCuenta = new Usuario();
             titularCuenta.setNombre("Carlos");
             titularCuenta.setApellido("Páez");
+
+        //Genero un segundo titular para el testSetUser:
+        titularCuenta2 = new Usuario("Luciana", "Fernandez");
 
         //Para que el Usuario sea igual que el titular, debo pasarle el titular en lugar de un new Usuario:
         //cuenta = new CuentaBancaria(new Usuario("Carlos", "Páez"));
@@ -25,6 +33,22 @@ public class CuentaBancariaTest {
     public void testGetUser(){
         //Para ello tengo que validar si el Usuario titular de esa Cuenta (expected) es igual al Usuario obtenido de la Cuenta
         Assert.assertEquals(titularCuenta, cuenta.getUsuario());
+    }
+
+    //Probamos que a la CuentaBancaria le podemos cambiar el Usuario principal:
+    @Test
+    public void testSetUser(){
+        //Le agrego/seteo a la cuenta un segundo titular:
+        cuenta.setUsuario(titularCuenta2);
+        //Valido que el resultado esperado corresponda al titularCuenta2
+        Assert.assertEquals(titularCuenta2, cuenta.getUsuario());
+    }
+
+    //Probamos setear un saldo:
+    @Test
+    public void testSetSaldo(){
+        cuenta.setSaldo(SALDO_AGREGADO);
+        Assert.assertEquals(SALDO_AGREGADO, cuenta.getSaldo(), 0.01);
     }
 
     //Probamos poder depositarle a la cuenta $500
